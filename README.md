@@ -4,6 +4,8 @@ A production grade multi provider LLM proxy deployed on AWS ECS Fargate. Routes 
 
 ## Architecture
 
+![Architecture](llm_gateway_architecture.svg)
+
 ```
 Client → API Gateway (HTTP) → VPC Link → ECS Fargate → OpenAI / Anthropic
                                               │
@@ -48,12 +50,12 @@ Python 3.12, FastAPI, uvicorn, httpx, boto3, Pydantic, Docker, Terraform
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|---|---|---|
-| `/health` | GET | Health check with provider status |
-| `/v1/complete` | POST | Route a completion request |
-| `/v1/feedback` | POST | Submit feedback on a response |
-| `/docs` | GET | Interactive Swagger UI |
+| Endpoint       | Method | Description                       |
+| -------------- | ------ | --------------------------------- |
+| `/health`      | GET    | Health check with provider status |
+| `/v1/complete` | POST   | Route a completion request        |
+| `/v1/feedback` | POST   | Submit feedback on a response     |
+| `/docs`        | GET    | Interactive Swagger UI            |
 
 ### Example Request
 
