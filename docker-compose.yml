@@ -1,0 +1,32 @@
+services:
+  gateway:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - DYNAMODB_REQUEST_LOG_TABLE=llm-gateway-dev-request-log
+      - DYNAMODB_CACHE_TABLE=llm-gateway-dev-cache
+      - DYNAMODB_EVAL_TABLE=llm-gateway-dev-eval
+      - S3_LOG_ARCHIVE_BUCKET=local-log-archive
+      - CLOUDWATCH_NAMESPACE=LLMGateway
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-placeholder}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-placeholder}
+      - DYNAMODB_ENDPOINT_URL=http://dynamodb-local:8000
+    depends_on:
+      dynamodb-local:
+        condition: service_healthy
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - "8001:8000"
+    command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/shell/ || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5

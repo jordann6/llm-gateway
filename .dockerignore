@@ -1,0 +1,9 @@
+terraform/
+lambda/
+.git/
+.gitignore
+docker-compose.yml
+*.md
+__pycache__/
+.pytest_cache/
+.env
