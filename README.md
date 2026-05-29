@@ -154,3 +154,20 @@ docker-compose up
 ```
 
 Runs the FastAPI app with DynamoDB Local for offline development.
+
+## Terraform Outputs
+
+| Output | Description |
+|---|---|
+| `api_endpoint` | API Gateway endpoint URL |
+| `ecs_cluster_name` | ECS cluster name |
+| `ecs_service_name` | ECS service name |
+| `cloudwatch_dashboard_url` | CloudWatch dashboard URL |
+| `log_archive_bucket` | S3 bucket for archived request logs |
+| `ecr_repository_url` | ECR repository URL for pushing container images |
+| `request_log_table_name` | DynamoDB request log table name — consumed by the [AWS Cost Intelligence Dashboard](https://github.com/jordann6/aws-cost-intelligence-dashboard) to ingest LLM API spend |
+| `request_log_table_arn` | DynamoDB request log table ARN |
+
+## Integrations
+
+The gateway's DynamoDB request log table (`request_log_table_name`) is consumed by the [AWS Cost Intelligence Dashboard](https://github.com/jordann6/aws-cost-intelligence-dashboard). A dedicated LLM ingester Lambda scans the table daily, aggregates `estimated_cost_cents` by provider, and writes the totals into the FinOps dashboard alongside AWS service costs — giving z-score anomaly detection and 14-day spend forecasting across both infrastructure and LLM API spend.

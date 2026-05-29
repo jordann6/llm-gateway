@@ -27,3 +27,13 @@ output "ecr_repository_url" {
   description = "ECR repository URL for pushing container images"
   value       = module.ecs.ecr_repository_url
 }
+
+output "request_log_table_name" {
+  description = "DynamoDB request log table name (used by the FinOps cost intelligence dashboard)"
+  value       = module.dynamodb.request_log_table_name
+}
+
+output "request_log_table_arn" {
+  description = "DynamoDB request log table ARN"
+  value       = module.dynamodb.request_log_table_arn
+}
