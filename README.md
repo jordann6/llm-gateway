@@ -4,7 +4,7 @@ A production grade multi provider LLM proxy deployed on AWS ECS Fargate. Routes 
 
 ## Architecture
 
-![Architecture](llm_gateway_architecture.svg)
+![Architecture](docs/architecture.png)
 
 ```
 Client → API Gateway (HTTP) → VPC Link → ECS Fargate → OpenAI / Anthropic
