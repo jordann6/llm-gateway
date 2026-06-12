@@ -1,5 +1,7 @@
 # LLM Gateway & Observability Platform
 
+[![Validate](https://github.com/jordann6/llm-gateway/actions/workflows/validate.yml/badge.svg)](https://github.com/jordann6/llm-gateway/actions/workflows/validate.yml)
+
 A production grade multi provider LLM proxy deployed on AWS ECS Fargate. Routes requests across OpenAI (GPT-4o-mini) and Anthropic (Claude Haiku 4.5) based on cost, latency, or quality strategy. Caches responses in DynamoDB, logs every request, emits CloudWatch metrics, and runs an automated eval pipeline using LLM as judge.
 
 ## Architecture
